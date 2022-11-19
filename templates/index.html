@@ -1,0 +1,120 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>INNOVATION AGRO GROUP</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet">
+	<link rel="stylesheet"  href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link href="{% static '/css/style.css' %}" rel="stylesheet" type="text/css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+</head>
+
+<body>
+	<header>
+		<div class="wrap-nav">
+			<nav class="header-nav">
+				<a href="#about-me">ABOUT US</a>
+				<a href="#service">OUR WORKS</a>
+				<a href="#work">PRODUCTS</a>
+				<a href="#contact">CONTACTS</a>
+			</nav>
+		</div>
+		<div class="fullscreen-bg">
+			<div class="overlay">
+				<h1>WELCOME TO<br><span>INNOVATION AGRO GROUP</span></h1>
+			</div>
+			{% for vid in video %}
+			<video loop muted autoplay class="fullscreen-bg__video">
+				<source src="{{ vid.video_file.url }}" type="video/mp4">
+			</video>
+			{% endfor %}
+		</div>
+	</header>
+	<main>
+		<section class="about-me" id="about-me">
+			<article>
+				<h2>ABOUT US</h2>
+			</article>
+			<div class="about-me-wrapper">
+				<div class="about-me-picture">
+					<img src="{% static '/img/about-me.jpg' %}">
+				</div>
+				<div class="about-me-text">
+					{% for about in about_me %}
+						<h3>{{ about.description }}</h3>
+					{% endfor %}
+				</div>
+
+			</div>
+		</section>
+		<section class="services" id="service">
+			<article>
+				<h2>OUR WORKS</h2>
+			</article>
+			<div class="services-icons">
+				<div class="services-icon1">
+					<img src="{% static '/img/services-icon1.png' %}">
+					<h3>{{ services_dreds.name }}</h3>
+					<p>{{ services_dreds.description }}</p>
+				</div>
+				<div class="services-icon2">
+					<img src="{% static '/img/services-icon2.png' %}">
+					<h3>{{ services_afro.name }}</h3>
+					<p>{{ services_afro.description }}</p>
+				</div>
+				<div class="services-icon3">
+					<img src="{% static '/img/services-icon3.png' %}">
+					<h3>{{ services_braids.name }}</h3>
+					<p>{{ services_braids.description }}</p>
+				</div>
+				<div class="services-icon4">
+					<img src="{% static '/img/services-icon4.png' %}">
+					<h3>{{ services_learn.name }}</h3>
+					<p>{{ services_learn.description }}</p>
+				</div>
+			</div>
+		</section>
+		<section class="works" id="work">
+			<h2>PRODUCTS</h2>
+			<h3>{{ product_images.name }}</h3>
+			<div class="image-slider swiper-container">
+				<div class="image-slider__wrapper swiper-wrapper">
+					{% for product in product_images %}
+						<div class="image-slider__slide swiper-slide">
+							<img src="{{ product.product_images.url }}" height="750px" alt="Продукты">
+						</div>
+					{% endfor %}
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
+		</section>
+	</main>
+	<footer>
+		<h2>CONTACTS</h2>
+		<div class="contacts" id="contact">
+			<div class="contacts-1">
+				<img src="{% static '/img/logo.jpg' %}" height="100px" width="350px">
+				<p>PRIVATE COMPANY LIMITED BY SHARES<br>INNOVATION AGRO GROUP LIMITED<br>7/F, MW Tower, 111 Bonham Strand, Sheung Wan, Hong Kong</p>
+			</div>
+		</div>
+		<div class="footer-form">
+			<h3 class="form-article">Send a request<br>and we will contact you</h3>
+			<form action="{% url 'get_order' %}" method="post">
+				{% csrf_token %}
+				<div class="form">
+					<div>{{ form.name.label }} {{ form.name }}</div>
+					<div>{{ form.email.label }} {{ form.email }}</div>
+				</div>
+				<div class="footer-button">
+					<button class="btn" type="submit">SUBMIT</button>
+				</div>
+			</form>
+		</div>
+	</footer>
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+	<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+</body>
+</html>
